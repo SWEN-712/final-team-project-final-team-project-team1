@@ -5,12 +5,13 @@ from flask import Flask, render_template, request
 from ocr_core import ocr_core
 
 # define a folder to store and later serve the images
-UPLOAD_FOLDER = '/static/uploads/'
+UPLOAD_FOLDER = 'static/uploads/'
 
 # allow files of a specific type
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 LANGUAGE_OPTIONS = ['English', 'Spanish', 'French', 'Hindi']
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 # function to check the file extension
@@ -53,6 +54,7 @@ def upload_page():
             # call the OCR function on it
             lang = format_language(lang)
             extracted_text = ocr_core(file, lang)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
 
             # extract the text and display it
             return render_template('upload.html',
