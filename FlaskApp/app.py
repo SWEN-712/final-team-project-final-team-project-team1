@@ -9,7 +9,7 @@ UPLOAD_FOLDER = '/static/uploads/'
 
 # allow files of a specific type
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-
+LANGUAGE_OPTIONS = ['English', 'Spanish', 'French', 'Hindi']
 app = Flask(__name__)
 
 
@@ -17,6 +17,17 @@ app = Flask(__name__)
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def format_language(language):
+    if language == LANGUAGE_OPTIONS[0]:
+        return 'eng'
+    elif language == LANGUAGE_OPTIONS[1]:
+        return 'spa'
+    elif language == LANGUAGE_OPTIONS[2]:
+        return 'fra'
+    elif language == LANGUAGE_OPTIONS[3]:
+        return 'hin'
 
 
 # route and function to handle the home page
@@ -31,23 +42,27 @@ def upload_page():
     if request.method == 'POST':
         # check if there is a file in the request
         if 'file' not in request.files:
-            return render_template('upload.html', msg='No file selected')
+            return render_template('upload.html', msg='No file selected', languages=LANGUAGE_OPTIONS)
         file = request.files['file']
+        lang = request.form.get('languages')
         # if no file is selected
         if file.filename == '':
-            return render_template('upload.html', msg='No file selected')
+            return render_template('upload.html', msg='No file selected', languages=LANGUAGE_OPTIONS)
 
         if file and allowed_file(file.filename):
             # call the OCR function on it
-            extracted_text = ocr_core(file)
+            lang = format_language(lang)
+            extracted_text = ocr_core(file, lang)
 
             # extract the text and display it
             return render_template('upload.html',
                                    msg='Successfully processed',
                                    extracted_text=extracted_text,
-                                   img_src=UPLOAD_FOLDER + file.filename)
+                                   img_src=UPLOAD_FOLDER + file.filename,
+                                   languages=LANGUAGE_OPTIONS
+                                   )
     elif request.method == 'GET':
-        return render_template('upload.html')
+        return render_template('upload.html', languages=LANGUAGE_OPTIONS)
 
 
 if __name__ == '__main__':

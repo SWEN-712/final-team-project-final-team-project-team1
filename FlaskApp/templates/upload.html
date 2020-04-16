@@ -14,6 +14,11 @@
    <form method=post enctype=multipart/form-data>
      <p><input type=file name=file>
         <input type=submit value=Upload>
+       <select name="languages" >
+           {% for lang in languages %}
+           <option value="{{lang}}">{{lang}}</option>
+           {% endfor %}
+       </select>
    </form>
 
    <h1>Result:</h1>
