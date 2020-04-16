@@ -40,6 +40,7 @@ def home_page():
 # route and function to handle the upload page
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_page():
+    # print(os.getcwd())
     if request.method == 'POST':
         # check if there is a file in the request
         if 'file' not in request.files:
