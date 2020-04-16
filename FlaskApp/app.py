@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request
 
 # import our OCR function
-from FlaskApp.ocr_core import ocr_core
+from ocr_core import ocr_core
 
 # define a folder to store and later serve the images
 UPLOAD_FOLDER = 'static/uploads/'
@@ -41,7 +41,7 @@ def upload_page():
         if file and allowed_file(file.filename):
             # call the OCR function on it
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-            file.save(file.filename)
+            # file.save(file.filename)
             extracted_text = ocr_core(file)
 
             # extract the text and display it
