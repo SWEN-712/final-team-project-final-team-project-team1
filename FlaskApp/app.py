@@ -52,16 +52,16 @@ def upload_page():
 
         if file and allowed_file(file.filename):
             # call the OCR function on it
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
             lang = format_language(lang)
             extracted_text = ocr_core(file, lang)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
 
             # extract the text and display it
             return render_template('upload.html',
                                    msg='Successfully processed',
                                    extracted_text=extracted_text,
-                                   img_src=UPLOAD_FOLDER + file.filename,
-                                   languages=LANGUAGE_OPTIONS
+                                   languages=LANGUAGE_OPTIONS,
+                                   img_src=os.path.join(app.config['UPLOAD_FOLDER'], file.filename),
                                    )
     elif request.method == 'GET':
         return render_template('upload.html', languages=LANGUAGE_OPTIONS)
