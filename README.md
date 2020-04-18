@@ -1,4 +1,6 @@
-# final-team-project-team1
+# Increasing Web Accessibility: Extracting Text From Images
+### Final Team Project - Team 1
+
 Before running the app you need to:
 1. Install tesseract (https://github.com/UB-Mannheim/tesseract/wiki) for Windows
 2. Download content from languages folder and place into C:\Program Files\Tesseract-OCR\tessdata (or wherever tesseract was installed)
@@ -10,3 +12,7 @@ To start the web app:
 1. Run app.py from terminal
 2. Navigate to http://localhost:5000/upload
 3. Upload image with text and view extracted text
+
+Team members:
+Diego Hilario Barinas, Kirtana Suresh, Murtaza Tamjeed, Shimon Johnson
+
