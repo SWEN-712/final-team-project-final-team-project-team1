@@ -4,6 +4,15 @@ except ImportError:
     import Image
 import pytesseract
 
+SOURCE_LANGUAGE_OPTIONS = ['English', 'Spanish', 'French', 'Hindi']
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+
+
+# function to check the file extension
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 def ocr_core(filename, language):
     """
@@ -15,4 +24,13 @@ def ocr_core(filename, language):
     text = pytesseract.image_to_string(Image.open(filename), lang=language)
     return text
 
-# print(ocr_core('FlaskApp\images\ocr_example_1.jpg'))
+
+def format_language(language):
+    if language == SOURCE_LANGUAGE_OPTIONS[0]:
+        return 'eng'
+    elif language == SOURCE_LANGUAGE_OPTIONS[1]:
+        return 'spa'
+    elif language == SOURCE_LANGUAGE_OPTIONS[2]:
+        return 'fra'
+    elif language == SOURCE_LANGUAGE_OPTIONS[3]:
+        return 'hin'

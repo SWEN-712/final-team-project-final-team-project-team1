@@ -14,8 +14,15 @@
    <form method=post enctype=multipart/form-data>
      <p><input type=file name=file>
         <input type=submit value=Upload>
-       <select name="languages" >
-           {% for lang in languages %}
+         Source Language:
+       <select name="source_languages" >
+           {% for lang in source_languages %}
+           <option value="{{lang}}">{{lang}}</option>
+           {% endfor %}
+       </select>
+         Target Language:
+       <select name="target_languages" >
+           {% for lang in target_languages %}
            <option value="{{lang}}">{{lang}}</option>
            {% endfor %}
        </select>
@@ -23,7 +30,7 @@
 
    <h1>Result:</h1>
    {% if img_src %}
-     <img src="{{ img_src }}">
+     <img src="{{ img_src }}" alt="{{extracted_text}}">
    {% endif %}
 
    {% if extracted_text %}
