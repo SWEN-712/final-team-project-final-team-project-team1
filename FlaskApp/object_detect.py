@@ -3,8 +3,7 @@ import matplotlib.pyplot as plt
 import cvlib as cv
 from cvlib.object_detection import draw_bbox
 import os
-from PIL import Image
-import pytesseract
+from collections import Counter
 
 im = cv2.imread('./static/uploads/t5.jpg')
 bbox, label, conf = cv.detect_common_objects(im)
@@ -27,6 +26,8 @@ def object_detect(filename):
     plt.savefig(os.path.join('./static/output/', just_fname+'.png'))
     # Image.open('testplot.png').save('testplot.jpg','JPEG')
     # plt.show()
-    labelstr = ' '.join([str(elem) for elem in label])
+    d = Counter(label)
+    # labelstr = ' '.join([str(elem) for elem in label])
+    labelstr = ", ".join('{} {}'.format(v, k) for k, v in d.items())
 
     return labelstr
