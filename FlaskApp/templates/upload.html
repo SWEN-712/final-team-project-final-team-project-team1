@@ -45,7 +45,12 @@
          <b> {{ objects_detected }} </b></p>
 
    {% else %}
-     The objects detected will be displayed here
+    <p> The objects detected will be displayed here </p>
    {% endif %}
+
+   {% if img_src %}
+     <img src="{{ obj_det }}" alt="{{objects_detected}}">
+   {% endif %}
+
  </body>
 </html>

@@ -22,6 +22,8 @@ def ocr_core(filename, language):
     if platform.system() != 'Darwin':
         pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
     text = pytesseract.image_to_string(Image.open(filename), lang=language)
+    if not text:
+        return "No text detected in the image"
     return text
 
 

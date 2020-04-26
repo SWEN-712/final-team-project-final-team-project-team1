@@ -59,8 +59,11 @@ def upload_page():
                                    source_languages=ocr_core.SOURCE_LANGUAGE_OPTIONS,
                                    target_languages=translator.TARGET_LANGUAGE_OPTIONS,
                                    img_src=os.path.join(app.config[
+                                                            'UPLOAD_FOLDER'],
+                                                        file.filename),
+                                   obj_det=os.path.join(app.config[
                                                             'OUTPUT_FOLDER'],
-                                                        just_fname+'.png'),
+                                                        just_fname + '.png'),
                                    objects_detected = objects_detected
                                    )
     elif request.method == 'GET':
