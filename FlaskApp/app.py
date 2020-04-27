@@ -54,7 +54,7 @@ def upload_page():
 
             # extract the text and display it
             return render_template('upload.html',
-                                   msg='Successfully processed',
+                                   msg='Successfully processed...',
                                    extracted_text=extracted_text,
                                    source_languages=ocr_core.SOURCE_LANGUAGE_OPTIONS,
                                    target_languages=translator.TARGET_LANGUAGE_OPTIONS,
@@ -72,4 +72,4 @@ def upload_page():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
