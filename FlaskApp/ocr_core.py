@@ -4,19 +4,23 @@ except ImportError:
     import Image
 import pytesseract
 
-SOURCE_LANGUAGE_OPTIONS = ['English', 'Spanish', 'French', 'Hindi']
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+SOURCE_LANGUAGE_OPTIONS = ['English', 'Spanish', 'French', 'Hindi']
 
-
-# function to check the file extension
 def allowed_file(filename):
+    """
+    Checks if file extension is allowed
+    :param filename: name of file with extension
+    :return: If extension is allowed or not
+    """
+
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def ocr_core(filename, language):
     """
-    This function will handle the core OCR processing of images.
+    This function extracts text from image
     """
     import platform
     if platform.system() != 'Darwin':
@@ -28,6 +32,12 @@ def ocr_core(filename, language):
 
 
 def format_language(language):
+    """
+    This function chooses source language
+    :param language: source language
+    :return: language chosen
+    """
+
     if language == SOURCE_LANGUAGE_OPTIONS[0]:
         return 'eng'
     elif language == SOURCE_LANGUAGE_OPTIONS[1]:

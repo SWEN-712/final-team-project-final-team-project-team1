@@ -18,6 +18,7 @@ def object_detect(filename):
     plt.imshow(output_image)
     plt.savefig(os.path.join('./static/output/', just_fname + '.png'))
     d = Counter(label)
+
     if not label:
         return "No objects detected"
     labelstr = ", ".join('{} {}'.format(v, k) for k, v in d.items())
