@@ -97,12 +97,12 @@
 				   {% endif %}
 					<br />
 				   {% if extracted_text %}
-						<div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate = "The extracted text from the image above is:">
+<!--						<div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate = "The extracted text from the image above is:">-->
 							<span class="label-input100">The extracted text from the image above is:</span>
-								<textarea class="input100" name="message" placeholder="">
+								<text class="input100" name="message" style="text-align:left;">
 									{{ extracted_text }}
-								</textarea>
-						</div>
+								</text>
+<!--						</div>-->
 				   {% else %}
 
 				   {% endif %}
@@ -111,17 +111,17 @@
 
 
 
-					{% if objects_detected %}
-					 <p> The objects detected in the image above is:
-						 <b> {{ objects_detected }} </b></p>
+<!--					{% if objects_detected %}-->
+<!--					 <p> The objects detected in the image above is:-->
+<!--						 <b> {{ objects_detected }} </b></p>-->
 
-				   {% else %}
-					<p> The objects detected will be displayed here </p>
-				   {% endif %}
+<!--				   {% else %}-->
+<!--					<p> The objects detected will be displayed here </p>-->
+<!--				   {% endif %}-->
 
-				   {% if img_src %}
-					 <img src="{{ obj_det }}" alt="{{objects_detected}}">
-				   {% endif %}
+<!--				   {% if img_src %}-->
+<!--					 <img src="{{ obj_det }}" alt="{{objects_detected}}"  class="rounded mx-auto d-block"  height="300" width="300">-->
+<!--				   {% endif %}-->
 
 						</div>
 					</div>
