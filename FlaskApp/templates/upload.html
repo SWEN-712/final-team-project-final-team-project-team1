@@ -35,15 +35,19 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			   		{% if msg %}
-			   			{{ msg }}
-			   		{% endif %}
-
 
 			<form class="contact100-form validate-form"  method=post enctype=multipart/form-data>
 				<span class="contact100-form-title">
 					Extract Text From Image
 				</span>
+
+				{% if msg %}
+				<div class="alert alert-success">
+    				<strong>
+							{{ msg }}
+					</strong>
+  				</div>
+				{% endif %}
 
 				<div class="custom-file">
 					<input type="file" class="custom-file-input" id="validatedCustomFile" accept="image/*" name="file"  required>
