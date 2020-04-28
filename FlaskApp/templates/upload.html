@@ -97,12 +97,12 @@
 				   {% endif %}
 					<br />
 				   {% if extracted_text %}
-<!--						<div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate = "The extracted text from the image above is:">-->
+						<div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate = "The extracted text from the image above is:">
 							<span class="label-input100">The extracted text from the image above is:</span>
-								<text class="input100" name="message" style="text-align:left;">
+								<textarea class="input100" name="message" placeholder="">
 									{{ extracted_text }}
-								</text>
-<!--						</div>-->
+								</textarea>
+						</div>
 				   {% else %}
 
 				   {% endif %}
@@ -120,7 +120,7 @@
 <!--				   {% endif %}-->
 
 <!--				   {% if img_src %}-->
-<!--					 <img src="{{ obj_det }}" alt="{{objects_detected}}"  class="rounded mx-auto d-block"  height="300" width="300">-->
+<!--					 <img src="{{ obj_det }}" alt="{{objects_detected}}">-->
 <!--				   {% endif %}-->
 
 						</div>
