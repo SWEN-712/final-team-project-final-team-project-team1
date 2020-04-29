@@ -53,7 +53,7 @@ def upload_page():
             # lang = ocr_core.format_language(lang)
             # extracted_text = ocr_core.ocr_detect(file, lang)
 
-            objects_detected = object_detect.object_detect(file.filename)
+            # objects_detected = object_detect.object_detect(file.filename)
 
             if target_lang != 'None':
                 target_lang = translator.format_language(target_lang)
@@ -62,6 +62,19 @@ def upload_page():
             just_fname = file.filename.split(".")[0]
 
             # text extraction
+            # return render_template('upload.html',
+            #                        msg='Successfully processed...',
+            #                        extracted_text=extracted_text,
+            #                        target_languages=translator.TARGET_LANGUAGE_OPTIONS,
+            #                        img_src=os.path.join(app.config[
+            #                                                 'UPLOAD_FOLDER'],
+            #                                             file.filename),
+            #                        obj_det=os.path.join(app.config[
+            #                                                 'OUTPUT_FOLDER'],
+            #                                             just_fname + '.png'),
+            #                        objects_detected = objects_detected
+            #                        )
+
             return render_template('upload.html',
                                    msg='Successfully processed...',
                                    extracted_text=extracted_text,
@@ -69,21 +82,7 @@ def upload_page():
                                    img_src=os.path.join(app.config[
                                                             'UPLOAD_FOLDER'],
                                                         file.filename),
-                                   obj_det=os.path.join(app.config[
-                                                            'OUTPUT_FOLDER'],
-                                                        just_fname + '.png'),
-                                   objects_detected = objects_detected
                                    )
-
-            # return render_template('upload.html',
-            #                        msg='Successfully processed...',
-            #                        extracted_text=extracted_text,
-            #                        source_languages=ocr_core.SOURCE_LANGUAGE_OPTIONS,
-            #                        target_languages=translator.TARGET_LANGUAGE_OPTIONS,
-            #                        img_src=os.path.join(app.config[
-            #                                                 'UPLOAD_FOLDER'],
-            #                                             file.filename),
-            #                        )
 
         else:
             return render_template('upload.html', msg='Only jpg, jpeg and png images allowed',
