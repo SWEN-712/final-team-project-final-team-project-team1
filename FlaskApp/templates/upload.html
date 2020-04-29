@@ -42,7 +42,7 @@
 				</span>
 
 				{% if msg %}
-				<div class="alert alert-success">
+				<div class="alert alert-info">
     				<strong>
 							{{ msg }}
 					</strong>
@@ -93,9 +93,11 @@
 			Result
 			</span>
 				   {% if img_src %}
-					 <img src="{{ img_src }}" alt="{{extracted_text}}" class="rounded mx-auto d-block"  height="300" width="300">
+					 <img src="{{ img_src }}" alt="{{extracted_text}}"
+						  class="rounded mx-auto d-block"  height=auto
+						  width=50%>
 				   {% endif %}
-					<br />
+					<br /><br>
 				   {% if extracted_text %}
 <!--						<div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate = "The extracted text from the image above is:">-->
 							<span class="label-input100">The extracted text from the image above is:</span>
@@ -109,18 +111,20 @@
 
 
 
-
+					<br>
 
 					{% if objects_detected %}
 			<span class="label-input100">The objects detected in the image above is:</span>
-						  {{ objects_detected }}
-
+			<text class="input100" name="message" placeholder="">
+									{{ objects_detected }}
+								</text>
 				   {% else %}
 					<p>  </p>
 				   {% endif %}
 
 				   {% if img_src %}
-					 <img src="{{ obj_det }}" alt="{{objects_detected}}">
+					 <img src="{{ obj_det }}" alt="{{objects_detected}}"
+						  class="rounded mx-auto d-block">
 				   {% endif %}
 
 						</div>
