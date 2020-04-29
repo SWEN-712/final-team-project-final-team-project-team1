@@ -27,25 +27,32 @@ def upload_page():
         # check if there is a file in the request
         if 'file' not in request.files:
             return render_template('upload.html', msg='No file selected',
-                                   source_languages=ocr_core.SOURCE_LANGUAGE_OPTIONS,
                                    target_languages=translator.TARGET_LANGUAGE_OPTIONS)
         file = request.files['file']
-        lang = request.form.get('source_languages')
+        # lang = request.form.get('source_languages')
         target_lang = request.form.get('target_languages')
 
         # if no file is selected
         if file.filename == '':
             return render_template('upload.html', msg='No file selected',
-                                   source_languages=ocr_core.SOURCE_LANGUAGE_OPTIONS,
                                    target_languages=translator.TARGET_LANGUAGE_OPTIONS)
-
-        print(ocr_core.allowed_file(file.filename))
 
         if file and ocr_core.allowed_file(file.filename):
             # call the OCR function on it
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-            lang = ocr_core.format_language(lang)
-            extracted_text = ocr_core.ocr_core(file, lang)
+
+            extracted_text, lang = ocr_core.auto_detect_text(file)
+
+            if lang == 'XX':
+                return render_template('upload.html', msg='Language not '
+                                                          'recognised or '
+                                                          'Image does not '
+                                                          'have text',
+                                   target_languages=translator.TARGET_LANGUAGE_OPTIONS)
+
+            # lang = ocr_core.format_language(lang)
+            # extracted_text = ocr_core.ocr_detect(file, lang)
+
             objects_detected = object_detect.object_detect(file.filename)
 
             if target_lang != 'None':
@@ -58,7 +65,6 @@ def upload_page():
             return render_template('upload.html',
                                    msg='Successfully processed...',
                                    extracted_text=extracted_text,
-                                   source_languages=ocr_core.SOURCE_LANGUAGE_OPTIONS,
                                    target_languages=translator.TARGET_LANGUAGE_OPTIONS,
                                    img_src=os.path.join(app.config[
                                                             'UPLOAD_FOLDER'],
@@ -81,12 +87,10 @@ def upload_page():
 
         else:
             return render_template('upload.html', msg='Only jpg, jpeg and png images allowed',
-                                   source_languages=ocr_core.SOURCE_LANGUAGE_OPTIONS,
                                    target_languages=translator.TARGET_LANGUAGE_OPTIONS)
 
     elif request.method == 'GET':
-        return render_template('upload.html', source_languages=ocr_core.SOURCE_LANGUAGE_OPTIONS,
-                               target_languages=translator.TARGET_LANGUAGE_OPTIONS)
+        return render_template('upload.html', target_languages=translator.TARGET_LANGUAGE_OPTIONS)
 
 
 if __name__ == '__main__':
